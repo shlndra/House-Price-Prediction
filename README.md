@@ -14,11 +14,7 @@ A machine learning model to predict house prices based on features like square f
 - [Project Overview](#-project-overview)
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Results](#-results)
-- [Contributing](#-contributing)
-- [License](#-license)
+
 
 ---
 
