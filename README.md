@@ -47,7 +47,6 @@ This project predicts house prices using regression techniques:
 ---
 
 
-
 import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -110,5 +109,3 @@ print(df.groupby("species").mean(), "\n")
 
 print("Detailed Stats by Species:")
 print(df.groupby("species").describe(), "\n")
-
-plt.show()
