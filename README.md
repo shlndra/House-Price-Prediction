@@ -48,49 +48,67 @@ This project predicts house prices using regression techniques:
 
 
 
+import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 
-# Load the dataset
-df = pd.read_csv("sample_employee_data.csv")
+# Load the Iris dataset
+df = sns.load_dataset("iris")
 
-# Display the first few rows
-print("🔹 First 5 rows:")
-print(df.head())
+# -----------------------------
+# 1. Dataset Overview
+# -----------------------------
+print("Dataset Info:")
+print(df.info(), "\n")
 
-# Dataset info
-print("\n🔹 Info:")
-print(df.info())
+print("Statistical Summary:")
+print(df.describe(), "\n")
 
-# Check for missing values
-print("\n🔹 Missing Values:")
-print(df.isnull().sum())
+print("Missing Values:")
+print(df.isnull().sum(), "\n")
 
-# Summary statistics
-print("\n🔹 Summary Statistics:")
-print(df.describe())
+# -----------------------------
+# 2. Univariate Analysis
+# -----------------------------
+print("Basic Statistics for Sepal Length:")
+print("Sum:", df["sepal_length"].sum())
+print("Mean:", df["sepal_length"].mean())
+print("Mode:", df["sepal_length"].mode().values)
 
-# Value counts for categorical column
-print("\n🔹 Department Counts:")
-print(df["Department"].value_counts())
-
-# Mean Salary by Department
-print("\n🔹 Mean Salary by Department:")
-print(df.groupby("Department")["Salary"].mean())
-
-# Data Visualizations
-plt.figure(figsize=(12, 5))
-
-# 1. Histogram of Age
-plt.subplot(1, 2, 1)
-sns.histplot(df["Age"], kde=True, color="skyblue")
-plt.title("Age Distribution")
-
-# 2. Boxplot of Salary by Department
-plt.subplot(1, 2, 2)
-sns.boxplot(x="Department", y="Salary", data=df, palette="pastel")
-plt.title("Salary by Department")
-
+# Histograms
+df.hist(figsize=(10, 6), color='skyblue', edgecolor='black')
+plt.suptitle("Histogram of Iris Features")
 plt.tight_layout()
+plt.show()
+
+# Boxplots for outlier detection
+sns.boxplot(data=df, orient="h", palette="Set2")
+plt.title("Boxplot of All Numerical Features")
+plt.show()
+
+# -----------------------------
+# 3. Bivariate Analysis
+# -----------------------------
+# Pairplot with hue
+sns.pairplot(df, hue="species", palette="bright")
+plt.suptitle("Pairplot of Iris Features by Species", y=1.02)
+plt.show()
+
+# Correlation heatmap (numeric features only)
+numeric_df = df.select_dtypes(include='number')
+corr = numeric_df.corr()
+
+sns.heatmap(corr, annot=True, cmap="coolwarm")
+plt.title("Correlation Heatmap of Numerical Features")
+plt.show()
+
+# -----------------------------
+# 4. Group Statistics by Species
+# -----------------------------
+print("Mean Values Grouped by Species:")
+print(df.groupby("species").mean(), "\n")
+
+print("Detailed Stats by Species:")
+print(df.groupby("species").describe(), "\n")
+
 plt.show()
