@@ -48,39 +48,25 @@ This project predicts house prices using regression techniques:
 
 
 
+import seaborn as sns
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 
-# 1. Import dataset using CSV file
-df = pd.read_csv('/mnt/data/file-UHAt3FHm48GqvSGdeLBRyC')
+# Load sample dataset
+df = sns.load_dataset("iris")
 
-# 2. Display first 5 rows of the dataset
-print("Dataset Preview:")
+# Display dataset
 print(df.head())
 
-# 3. Calculating sum, mean, and mode of a particular column
-column = df.columns[1]  # change index if needed
-print(f"\nColumn Selected: {column}")
-print(f"Sum: {df[column].sum()}")
-print(f"Mean: {df[column].mean()}")
-print(f"Mode: {df[column].mode().values}")
+# Perform similar analysis as before
+print("Sum:", df["sepal_length"].sum())
+print("Mean:", df["sepal_length"].mean())
+print("Mode:", df["sepal_length"].mode().values)
 
-# 4. Basic Exploratory Data Analysis (EDA)
-print("\nDataset Info:")
-print(df.info())
-
-print("\nMissing Values:")
-print(df.isnull().sum())
-
-print("\nSummary Statistics:")
-print(df.describe())
-
-# 5. Data Visualization
-plt.figure(figsize=(10, 5))
-plt.hist(df[column], bins=20, color='skyblue', edgecolor='black')
-plt.title(f'Distribution of {column}')
-plt.xlabel(column)
-plt.ylabel('Frequency')
+# Visualization
+plt.hist(df["sepal_length"], bins=10, color='lightgreen')
+plt.title("Sepal Length Distribution")
+plt.xlabel("Sepal Length")
+plt.ylabel("Frequency")
 plt.grid(True)
 plt.show()
