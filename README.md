@@ -48,25 +48,49 @@ This project predicts house prices using regression techniques:
 
 
 
-import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Load sample dataset
-df = sns.load_dataset("iris")
+# Load the dataset
+df = pd.read_csv("sample_employee_data.csv")
 
-# Display dataset
+# Display the first few rows
+print("🔹 First 5 rows:")
 print(df.head())
 
-# Perform similar analysis as before
-print("Sum:", df["sepal_length"].sum())
-print("Mean:", df["sepal_length"].mean())
-print("Mode:", df["sepal_length"].mode().values)
+# Dataset info
+print("\n🔹 Info:")
+print(df.info())
 
-# Visualization
-plt.hist(df["sepal_length"], bins=10, color='lightgreen')
-plt.title("Sepal Length Distribution")
-plt.xlabel("Sepal Length")
-plt.ylabel("Frequency")
-plt.grid(True)
+# Check for missing values
+print("\n🔹 Missing Values:")
+print(df.isnull().sum())
+
+# Summary statistics
+print("\n🔹 Summary Statistics:")
+print(df.describe())
+
+# Value counts for categorical column
+print("\n🔹 Department Counts:")
+print(df["Department"].value_counts())
+
+# Mean Salary by Department
+print("\n🔹 Mean Salary by Department:")
+print(df.groupby("Department")["Salary"].mean())
+
+# Data Visualizations
+plt.figure(figsize=(12, 5))
+
+# 1. Histogram of Age
+plt.subplot(1, 2, 1)
+sns.histplot(df["Age"], kde=True, color="skyblue")
+plt.title("Age Distribution")
+
+# 2. Boxplot of Salary by Department
+plt.subplot(1, 2, 2)
+sns.boxplot(x="Department", y="Salary", data=df, palette="pastel")
+plt.title("Salary by Department")
+
+plt.tight_layout()
 plt.show()
